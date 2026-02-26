@@ -1,12 +1,12 @@
 export class Gameboard {
     constructor() {
-        this.grid = new Array().fill(null).map(() => Array(10).fill(null));
+        this.grid = new Array(10).fill(null).map(() => Array(10).fill(null));
         this.ship = [];
         this.missedAttacks = [];
     }
 
     placeShip(ship, coordinates) {
-        coordinates.array.forEach(([row, col]) => {
+        coordinates.forEach(([row, col]) => {
             this.grid[row][col] = ship;
         });
         this.ship.push({ship, coordinates});
@@ -20,5 +20,9 @@ export class Gameboard {
         } else {
             this.missedAttacks.push([row, col]);
         }
+    }
+
+    allSunk() {
+        return this.ship.every(({ship}) => ship.isSunk());
     }
 }    
