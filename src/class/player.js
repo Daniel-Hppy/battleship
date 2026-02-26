@@ -7,8 +7,9 @@ export class Player {
     }
     
     attack(enemyBoard, row, col) {
-        enemyBoard.recieveAttack(row, col);
+        const result = enemyBoard.recieveAttack(row, col);
         this.attackedCoords.push([row, col]);
+        return result;
     }
 }
 
@@ -19,8 +20,9 @@ export class Computer {
     }
 
     attack(enemyBoard, row, col) {
-        enemyBoard.recieveAttack(row, col);
+        const result = enemyBoard.recieveAttack(row, col);
         this.attackedCoords.push([row, col]);
+        return result;
     }
 
     randomAttack(enemyBoard) {

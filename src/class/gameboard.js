@@ -17,8 +17,10 @@ export class Gameboard {
 
     if (target) {
       target.hit();
+      return 'hit';
     } else {
       this.missedAttacks.push([row, col]);
+      return 'miss';
     }
   }
 

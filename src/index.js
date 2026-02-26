@@ -1,2 +1,5 @@
 import "./styles.css";
-import { Ship } from "./class/ship.js";
+import { createBoard } from "./module/app.js";
+
+const board = document.querySelector('.board');
+createBoard(board);
