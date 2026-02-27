@@ -1,5 +1,5 @@
 import "./styles.css";
-import { createBoard } from "./module/app.js";
+import { Game } from "./class/game.js";
 
-const board = document.querySelector('.board');
-createBoard(board);
+const game = new Game();
+window.game = game;
