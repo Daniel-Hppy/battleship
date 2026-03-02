@@ -97,14 +97,19 @@ export class Game {
         this.computer.board.placeShip(computerShip7, [[0, 7]]);
     }
 
-    // start() {
-    //     this.placeShips();
+    handleComputerTurn() {
+        const result = this.handleComputerAttack();
+        
+        const lastAttack = this.computer.attackedCoords[this.computer.attackedCoords.length - 1];
+        const [row, col] = lastAttack;
+        
+        domController.updateCell(row, col, 'human-board', result);
+    }
 
-    //     const humanBoard = document.querySelector('.player');
-    //     const computerBoard = document.querySelector('.computer');
-
-    //     domController.createBoard(humanBoard);
-    //     domController.createBoard(computerBoard);
-
-    // }
+    start() {
+        this.placeShips();
+        
+        domController.drawBoard('human-board', this.human, false, this);
+        domController.drawBoard('computer-board', this.computer, true, this);
+    }
 }

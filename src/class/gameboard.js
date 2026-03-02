@@ -17,10 +17,12 @@ export class Gameboard {
 
     if (target) {
       target.hit();
-      return "hit";
+      this.grid[row][col] = 'hit';
+      return 'hit';
     } else {
       this.missedAttacks.push([row, col]);
-      return "miss";
+      this.grid[row][col] ='miss';
+      return 'miss';
     }
   }
 

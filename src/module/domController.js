@@ -1,14 +1,60 @@
 export const domController = (() => {
-  const createBoard = (container) => {
-    for (let row = 0; row < 10; row++) {
-      for (let col = 0; col < 10; col++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        cell.dataset.row = row;
-        cell.dataset.col = col;
-        container.appendChild(cell);
-      }
-    }
-  };
-  return { createBoard };
+    
+    const drawBoard = (containerId, player, isClickable, game) => {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container ${containerId} not found`);
+            return;
+        }
+        
+        container.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        
+        player.board.grid.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.classList.add('cell');
+                
+                
+                if (cell && cell !== 'hit' && cell !== 'miss' && player.constructor.name !== 'Computer') {
+                    cellDiv.classList.add('ship');
+                }
+                
+                
+                if (cell === 'hit') {
+                    cellDiv.classList.add('hit');
+                    cellDiv.textContent = '💥';
+                } else if (cell === 'miss') {
+                    cellDiv.classList.add('miss');
+                    cellDiv.textContent = 'miss';
+                }
+                
+                
+                if (isClickable && cell !== 'hit' && cell !== 'miss') {
+                    cellDiv.addEventListener('click', () => {
+                        const result = game.handleHumanAttack(rowIndex, colIndex);
+                        
+                        
+                        drawBoard('computer-board', game.computer, true, game);
+                        
+                        
+                        if (!game.gameOver) {
+                            setTimeout(() => {
+                                game.handleComputerAttack();
+                                drawBoard('human-board', game.human, false, game);
+                            }, 500);
+                        }
+                    });
+                }
+                
+                fragment.appendChild(cellDiv);
+            });
+        });
+        
+        container.appendChild(fragment);
+    };
+    
+    return {
+        drawBoard
+    };
 })();
