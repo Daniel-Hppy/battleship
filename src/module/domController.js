@@ -18,7 +18,7 @@ export const domController = (() => {
           cell &&
           cell !== "hit" &&
           cell !== "miss" &&
-          player.constructor.name !== "Computer"
+          !player.isComputer
         ) {
           cellDiv.classList.add("ship");
         }

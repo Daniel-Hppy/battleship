@@ -4,6 +4,7 @@ export class Player {
   constructor() {
     this.board = new Gameboard();
     this.attackedCoords = [];
+    this.isComputer = false;
   }
 
   attack(enemyBoard, row, col) {
@@ -17,6 +18,7 @@ export class Computer {
   constructor() {
     this.board = new Gameboard();
     this.attackedCoords = [];
+    this.isComputer = true;
   }
 
   attack(enemyBoard, row, col) {
